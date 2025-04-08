@@ -3,12 +3,12 @@ import { routes } from "./routes";
 
 function App() {
   return (
-    <div className="container">
+    <div className="app__container">
       <Routes>
         <Route
           path="/"
           element={
-            <div className="problem-list">
+            <div className="problem__list">
               <p>Below are the list of solved problem links: </p>
 
               <ul>

@@ -8,16 +8,16 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.container {
+.app__container {
   padding: 2rem 4rem;
   width: 75%;
   margin: 0 auto;
 }
 
-.problem-list > p {
+.problem__list > p {
   margin: 1rem 0px;
 }
 
-.problem-list > ul {
+.problem__list > ul {
   padding-left: 2rem;
 }
