@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "./components/ProductCard";
 import PaginationHandler from "./components/PaginationHandler";
 import "./styles.css";
-
-const PAGE_SIZE = 10;
+import { PAGE_SIZE } from "../../constants";
 
 const index = () => {
   const [currentPage, setCurrentPage] = useState(0);
