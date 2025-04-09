@@ -14,14 +14,18 @@ const index = () => {
   const endIndex = (currentPage + 1) * PAGE_SIZE;
 
   const getProducts = async () => {
-    const response = await fetch(
-      "https://dummyjson.com/products?limit=500&select=title,price,thumbnail"
-    );
+    try {
+      const response = await fetch(
+        "https://dummyjson.com/products?limit=500&select=title,price,thumbnail"
+      );
 
-    if (response.status === 200) {
-      const products = await response.json();
+      if (response.status === 200) {
+        const products = await response.json();
 
-      setProducts(products.products);
+        setProducts(products.products);
+      }
+    } catch (e) {
+      console.log(e);
     }
   };
 
