@@ -3,8 +3,15 @@ import ProductCard from "./components/ProductCard";
 import PaginationHandler from "./components/PaginationHandler";
 import "./styles.css";
 
+const PAGE_SIZE = 10;
+
 const index = () => {
+  const [currentPage, setCurrentPage] = useState(0);
   const [products, setProducts] = useState([]);
+
+  const numberOfPages = Math.ceil(products.length / PAGE_SIZE);
+  const startIndex = currentPage * PAGE_SIZE;
+  const endIndex = (currentPage + 1) * PAGE_SIZE;
 
   const getProducts = async () => {
     const response = await fetch(
@@ -26,10 +33,14 @@ const index = () => {
     <div className="container">
       <h1>Pagination</h1>
 
-      <PaginationHandler />
+      <PaginationHandler
+        numberOfPages={numberOfPages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
 
       <div className="product__container">
-        {products.map((product) => {
+        {products?.slice(startIndex, endIndex)?.map((product, index) => {
           return <ProductCard key={product.id} product={product} />;
         })}
       </div>
