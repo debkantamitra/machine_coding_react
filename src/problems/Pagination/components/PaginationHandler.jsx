@@ -1,23 +1,31 @@
 const PaginationHandler = ({ numberOfPages, currentPage, setCurrentPage }) => {
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  const handleNext = () => {
+    setCurrentPage((currentPage) => currentPage + 1);
+  };
+
+  const handlePrev = () => {
+    setCurrentPage((currentPage) => currentPage - 1);
+  };
+
   return (
     <div className="pagination">
-      {currentPage > 0 && (
-        <button onClick={() => setCurrentPage(currentPage - 1)}>
-          Previous
-        </button>
-      )}
+      {currentPage > 0 && <button onClick={handlePrev}>Previous</button>}
 
       {[...Array(numberOfPages)].map((_, index) => (
         <button
           className={`${index === currentPage ? "active" : ""}`}
-          onClick={() => setCurrentPage(index)}
+          onClick={() => handlePageChange(index)}
         >
           {index + 1}
         </button>
       ))}
 
       {currentPage < numberOfPages - 1 && (
-        <button onClick={() => setCurrentPage(currentPage + 1)}>Next</button>
+        <button onClick={handleNext}>Next</button>
       )}
     </div>
   );
