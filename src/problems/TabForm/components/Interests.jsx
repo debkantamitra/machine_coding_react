@@ -1,3 +1,6 @@
+import styles from "../styles.module.css";
+import Error from "./Error";
+
 const Interests = ({ formData, setFormData, errors }) => {
   const handleFormData = (e) => {
     setFormData((prevData) => ({
@@ -10,7 +13,7 @@ const Interests = ({ formData, setFormData, errors }) => {
 
   return (
     <>
-      <div className="form__element__checkbox">
+      <div className={styles["form__element__checkbox"]}>
         <label htmlFor="coding">Coding</label>
         <input
           type="checkbox"
@@ -21,7 +24,7 @@ const Interests = ({ formData, setFormData, errors }) => {
         />
       </div>
 
-      <div className="form__element__checkbox">
+      <div className={styles["form__element__checkbox"]}>
         <label htmlFor="music">Music</label>
         <input
           type="checkbox"
@@ -32,7 +35,7 @@ const Interests = ({ formData, setFormData, errors }) => {
         />
       </div>
 
-      <div className="form__element__checkbox">
+      <div className={styles["form__element__checkbox"]}>
         <label htmlFor="cinema">Cinema</label>
         <input
           type="checkbox"
@@ -43,7 +46,7 @@ const Interests = ({ formData, setFormData, errors }) => {
         />
       </div>
 
-      <div className="form__element__checkbox">
+      <div className={styles["form__element__checkbox"]}>
         <label htmlFor="photography">Photography</label>
         <input
           type="checkbox"
@@ -54,7 +57,7 @@ const Interests = ({ formData, setFormData, errors }) => {
         />
       </div>
 
-      <p className="error">{errors.interests}</p>
+      <Error error={errors.interests} />
     </>
   );
 };

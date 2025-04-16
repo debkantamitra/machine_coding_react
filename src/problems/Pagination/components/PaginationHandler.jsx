@@ -1,3 +1,5 @@
+import styles from "../styles.module.css";
+
 const PaginationHandler = ({ numberOfPages, currentPage, setCurrentPage }) => {
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -12,12 +14,12 @@ const PaginationHandler = ({ numberOfPages, currentPage, setCurrentPage }) => {
   };
 
   return (
-    <div className="pagination">
+    <div className={styles.pagination}>
       {currentPage > 0 && <button onClick={handlePrev}>Previous</button>}
 
       {[...Array(numberOfPages)].map((_, index) => (
         <button
-          className={`${index === currentPage ? "active" : ""}`}
+          className={`${index === currentPage ? styles.active : ""}`}
           onClick={() => handlePageChange(index)}
         >
           {index + 1}

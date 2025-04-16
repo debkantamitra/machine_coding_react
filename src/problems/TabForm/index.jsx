@@ -2,7 +2,7 @@ import { useState } from "react";
 import Interests from "./components/Interests";
 import Profile from "./components/Profile";
 import Settings from "./components/Settings";
-import "./styles.css";
+import styles from "./styles.module.css";
 
 const TabForm = () => {
   const [formData, setFormData] = useState({
@@ -84,14 +84,14 @@ const TabForm = () => {
   };
 
   return (
-    <div className="container">
-      <div className="tabs">
+    <div className={styles.container}>
+      <div className={styles.tabs}>
         {tabs.map((tab, index) => {
           return (
             <button
               key={index}
-              className={`tabs__btn ${
-                activeTab === index ? "tabs__btn--active" : ""
+              className={`${styles.tabs__btn} ${
+                activeTab === index ? styles["tabs__btn--active"] : ""
               }`}
               onClick={() => tabs[activeTab].validate() && setActiveTab(index)}
             >
@@ -101,14 +101,14 @@ const TabForm = () => {
         })}
       </div>
 
-      <div className="tabs__content">
+      <div className={styles["tabs__content"]}>
         <ActiveTabComponent
           formData={formData}
           setFormData={setFormData}
           errors={errors}
         />
 
-        <div className="control__btns">
+        <div className={styles["control__btns"]}>
           {activeTab > 0 && (
             <button type="button" onClick={handlePrev}>
               Prev

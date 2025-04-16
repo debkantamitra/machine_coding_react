@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "../styles.module.css";
 
 const Settings = ({ formData, setFormData }) => {
   const themes = ["light", "dark"];
@@ -16,7 +17,7 @@ const Settings = ({ formData, setFormData }) => {
 
       {themes.map((theme, index) => {
         return (
-          <div className="form__element__radio" key={index}>
+          <div className={styles["form__element__radio"]} key={index}>
             <label
               htmlFor={theme}
               style={{

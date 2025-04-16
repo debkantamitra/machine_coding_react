@@ -1,5 +1,6 @@
 import TabForm from "./problems/TabForm";
 import Pagination from "./problems/Pagination";
+import Autocomplete from "./problems/Autocomplete";
 
 export const routes = [
   {
@@ -11,5 +12,10 @@ export const routes = [
     path: "/pagination",
     component: <Pagination />,
     label: "Pagination",
+  },
+  {
+    path: "/autocomplete",
+    component: <Autocomplete />,
+    label: "Autocomplete",
   },
 ];

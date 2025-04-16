@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "./components/ProductCard";
 import PaginationHandler from "./components/PaginationHandler";
-import "./styles.css";
+import styles from "./styles.module.css";
 import { PAGE_SIZE } from "../../constants";
 
 const index = () => {
@@ -33,7 +33,7 @@ const index = () => {
   }, []);
 
   return (
-    <div className="container">
+    <div className={styles.container}>
       <h1>Pagination</h1>
 
       <PaginationHandler
@@ -42,7 +42,7 @@ const index = () => {
         setCurrentPage={setCurrentPage}
       />
 
-      <div className="product__container">
+      <div className={styles.product__container}>
         {products?.slice(startIndex, endIndex)?.map((product, index) => {
           return <ProductCard key={product.id} product={product} />;
         })}

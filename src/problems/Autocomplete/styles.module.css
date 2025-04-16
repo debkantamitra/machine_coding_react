@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+}
+
+input {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid gray;
+}
+
+input:focus {
+  outline: 1px solid blue;
+}
+
+input::placeholder {
+  font-style: italic;
+}

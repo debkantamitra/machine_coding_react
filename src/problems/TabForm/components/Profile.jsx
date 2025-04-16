@@ -1,3 +1,6 @@
+import styles from "../styles.module.css";
+import Error from "./Error";
+
 // htmlFor is equivalent to for in native html
 const Profile = ({ formData, setFormData, errors }) => {
   const handleFormData = (e) => {
@@ -11,7 +14,7 @@ const Profile = ({ formData, setFormData, errors }) => {
 
   return (
     <>
-      <div className="form__element">
+      <div className={styles["form__element"]}>
         <label htmlFor="name">Name</label>
         <span>:</span>
         <div>
@@ -22,11 +25,11 @@ const Profile = ({ formData, setFormData, errors }) => {
             value={formData.name}
             onChange={handleFormData}
           />
-          <p className="error">{errors.name}</p>
+          <Error error={errors.name} />
         </div>
       </div>
 
-      <div className="form__element">
+      <div className={styles["form__element"]}>
         <label htmlFor="age">Age</label>
         <span>:</span>
         <div>
@@ -37,11 +40,11 @@ const Profile = ({ formData, setFormData, errors }) => {
             value={formData.age}
             onChange={handleFormData}
           />
-          <p className="error">{errors.age}</p>
+          <Error error={errors.age} />
         </div>
       </div>
 
-      <div className="form__element">
+      <div className={styles["form__element"]}>
         <label htmlFor="email">Email</label>
         <span>:</span>
         <div>
@@ -52,7 +55,8 @@ const Profile = ({ formData, setFormData, errors }) => {
             value={formData.email}
             onChange={handleFormData}
           />
-          <p className="error">{errors.email}</p>
+
+          <Error error={errors.email} />
         </div>
       </div>
     </>
