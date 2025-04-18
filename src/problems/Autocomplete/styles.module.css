@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 
-.App {
+.container {
   font-family: "Courier New", Courier, monospace;
   padding: 5rem;
   display: flex;
@@ -16,6 +16,7 @@ input {
   border: 1px solid gray;
   width: 30rem;
   font-size: medium;
+  margin-top: 2rem;
 }
 
 input:focus {
@@ -48,4 +49,8 @@ input::placeholder {
 
 .result:hover {
   background: rgb(240, 239, 239);
+}
+
+.result.result__active {
+  background: rgba(114, 223, 253, 0.482);
 }
