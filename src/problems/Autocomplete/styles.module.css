@@ -1,11 +1,21 @@
-.container {
+* {
+  box-sizing: border-box;
+}
+
+.App {
+  font-family: "Courier New", Courier, monospace;
+  padding: 5rem;
   display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 input {
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1rem;
   border-radius: 8px;
   border: 1px solid gray;
+  width: 30rem;
+  font-size: medium;
 }
 
 input:focus {
@@ -14,4 +24,28 @@ input:focus {
 
 input::placeholder {
   font-style: italic;
+}
+
+.result__container {
+  margin-top: 0.2rem;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0;
+  align-items: flex-start;
+  max-height: 15rem;
+  overflow-y: scroll;
+  width: 30rem;
+  border: 1px solid lightgray;
+  border-radius: 6px;
+  box-shadow: 0px 1px 3px lightgray;
+}
+
+.result {
+  padding: 0.4rem 1rem;
+  width: 30rem;
+  cursor: pointer;
+}
+
+.result:hover {
+  background: rgb(240, 239, 239);
 }
