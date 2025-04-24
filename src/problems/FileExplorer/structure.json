@@ -1,0 +1,15 @@
+[
+  { "id": 1, "name": "public", "isFolder": true, "children": [] },
+  {
+    "id": 2,
+    "name": "src",
+    "isFolder": true,
+    "children": [
+      { "id": 3, "name": "problems", "isFolder": true, "children": [] },
+      { "id": 4, "name": "App.jsx", "isFolder": false, "children": [] },
+      { "id": 5, "name": "constants.js", "isFolder": false, "children": [] },
+      { "id": 6, "name": "index.css", "isFolder": false, "children": [] },
+      { "id": 7, "name": "main.jsx", "isFolder": false, "children": [] }
+    ]
+  }
+]
