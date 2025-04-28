@@ -81,6 +81,8 @@ const TabForm = () => {
 
   const handleSubmit = () => {
     console.log(formData);
+
+    alert("Please check the console");
   };
 
   return (
