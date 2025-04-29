@@ -23,3 +23,18 @@
   cursor: pointer;
   margin-top: 0.5rem;
 }
+
+.action__container {
+  display: none;
+}
+
+.folder__item:hover .action__container {
+  display: initial;
+}
+
+.action__container > button {
+  border: none;
+  background: none;
+  padding: 0.1rem;
+  cursor: pointer;
+}

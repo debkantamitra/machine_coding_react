@@ -1,8 +1,16 @@
 import React, { useState } from "react";
 import styles from "./styles.module.css";
-import structure from "./structure.json";
+import structurePermanent from "./structure.json";
 
-const Folder = ({ structure, openFolderIds, handleFolderToggle }) => {
+const Folder = ({
+  structure,
+  openFolderIds,
+  handleFolderToggle,
+  handleDelete,
+}) => {
+  const [isCreateNewFile, setIsCreateNewFile] = useState(false);
+  const [isCreateNewFolder, setIsCreateNewFolder] = useState(false);
+
   return (
     <div className={styles.folder}>
       {structure.map((item) => {
@@ -39,6 +47,26 @@ const Folder = ({ structure, openFolderIds, handleFolderToggle }) => {
                 />
               )}
               <span>{item.name}</span>
+
+              <span className={styles.action__container}>
+                <button title="add" onClick={() => setIsCreateNewFile(true)}>
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/992/992651.png"
+                    alt="add"
+                    width={"16px"}
+                    height={"16px"}
+                  />
+                </button>
+
+                <button title="delete" onClick={() => handleDelete(item.id)}>
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/3161/3161358.png"
+                    alt="delete"
+                    width={"16px"}
+                    height={"16px"}
+                  />
+                </button>
+              </span>
             </div>
 
             {/* recurse */}
@@ -47,6 +75,7 @@ const Folder = ({ structure, openFolderIds, handleFolderToggle }) => {
                 structure={item.children}
                 openFolderIds={openFolderIds}
                 handleFolderToggle={handleFolderToggle}
+                handleDelete={handleDelete}
               />
             )}
           </React.Fragment>
@@ -56,7 +85,23 @@ const Folder = ({ structure, openFolderIds, handleFolderToggle }) => {
   );
 };
 
+const traverseAndDelete = (structure, id) => {
+  if (structure.length < 1) return structure;
+
+  // TODO: check for immutability
+  return structure.filter((item) => {
+    if (item.isFolder && item.id !== id) {
+      const returned = traverseAndDelete(item.children, id);
+
+      item.children = returned;
+    }
+
+    return item.id !== id;
+  });
+};
+
 const index = () => {
+  const [structure, setStructure] = useState(structurePermanent);
   const [openFolderIds, setOpenFolderIds] = useState([]);
 
   const handleFolderToggle = (folderId) => {
@@ -71,6 +116,12 @@ const index = () => {
     setOpenFolderIds(updatedOpenFolderIds);
   };
 
+  const handleDelete = (id) => {
+    const updatedStructure = traverseAndDelete(structure, id);
+
+    setStructure(updatedStructure);
+  };
+
   return (
     <div className={styles.container}>
       <h1>File Explorer</h1>
@@ -80,6 +131,7 @@ const index = () => {
         structure={structure}
         openFolderIds={openFolderIds}
         handleFolderToggle={handleFolderToggle}
+        handleDelete={handleDelete}
       />
     </div>
   );
