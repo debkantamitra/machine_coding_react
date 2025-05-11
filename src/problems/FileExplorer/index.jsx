@@ -1,3 +1,8 @@
+// IMPORTANT SUGGESTIONS:
+// 1. Improve the quality of the code - immutability specially
+// 2. unique id can be messed up
+// 3. Try improving on re rendering the whole list every time
+
 import React, { useState } from "react";
 import styles from "./styles.module.css";
 import structurePermanent from "./structure.json";
@@ -57,40 +62,42 @@ const Folder = ({
               <span>{item.name}</span>
 
               <span className={styles.action__container}>
-                <button
-                  title="add file"
-                  onClick={(e) => {
-                    e.stopPropagation();
+                {item.isFolder && (
+                  <>
+                    <button
+                      title="add file"
+                      onClick={(e) => {
+                        e.stopPropagation();
 
-                    setIsCreateNewFile({ isOpen: true, forId: item.id });
-                    setIsCreateNewFolder({ isOpen: false, forId: null });
-                  }}
-                >
-                  <img
-                    src="https://cdn-icons-png.flaticon.com/512/992/992651.png"
-                    alt="add"
-                    width={"16px"}
-                    height={"16px"}
-                  />
-                </button>
+                        setIsCreateNewFile({ isOpen: true, forId: item.id });
+                        setIsCreateNewFolder({ isOpen: false, forId: null });
+                      }}
+                    >
+                      <img
+                        src="https://cdn-icons-png.flaticon.com/512/992/992651.png"
+                        alt="add"
+                        width={"16px"}
+                        height={"16px"}
+                      />
+                    </button>
+                    <button
+                      title="add folder"
+                      onClick={(e) => {
+                        e.stopPropagation();
 
-                <button
-                  title="add folder"
-                  onClick={(e) => {
-                    e.stopPropagation();
-
-                    setIsCreateNewFolder({ isOpen: true, forId: item.id });
-                    setIsCreateNewFile({ isOpen: false, forId: null });
-                  }}
-                >
-                  <img
-                    src="https://cdn-icons-png.flaticon.com/512/992/992651.png"
-                    alt="add"
-                    width={"16px"}
-                    height={"16px"}
-                  />
-                </button>
-
+                        setIsCreateNewFolder({ isOpen: true, forId: item.id });
+                        setIsCreateNewFile({ isOpen: false, forId: null });
+                      }}
+                    >
+                      <img
+                        src="https://cdn-icons-png.flaticon.com/512/992/992651.png"
+                        alt="add"
+                        width={"16px"}
+                        height={"16px"}
+                      />
+                    </button>
+                  </>
+                )}
                 <button title="delete" onClick={() => handleDelete(item.id)}>
                   <img
                     src="https://cdn-icons-png.flaticon.com/512/3161/3161358.png"
