@@ -38,3 +38,18 @@
   padding: 0.1rem;
   cursor: pointer;
 }
+
+input {
+  width: 120px;
+  padding: 5px;
+  margin-right: 5px;
+  margin-top: 10px;
+}
+
+input::placeholder {
+  font-size: 12px;
+}
+
+button {
+  cursor: pointer;
+}

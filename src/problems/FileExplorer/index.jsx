@@ -7,9 +7,17 @@ const Folder = ({
   openFolderIds,
   handleFolderToggle,
   handleDelete,
+  handleCreateNewFile,
+  handleCreateNewFolder,
 }) => {
-  const [isCreateNewFile, setIsCreateNewFile] = useState(false);
-  const [isCreateNewFolder, setIsCreateNewFolder] = useState(false);
+  const [isCreateNewFile, setIsCreateNewFile] = useState({
+    isOpen: false,
+    forId: null,
+  });
+  const [isCreateNewFolder, setIsCreateNewFolder] = useState({
+    isOpen: false,
+    forId: null,
+  });
 
   return (
     <div className={styles.folder}>
@@ -49,7 +57,32 @@ const Folder = ({
               <span>{item.name}</span>
 
               <span className={styles.action__container}>
-                <button title="add" onClick={() => setIsCreateNewFile(true)}>
+                <button
+                  title="add file"
+                  onClick={(e) => {
+                    e.stopPropagation();
+
+                    setIsCreateNewFile({ isOpen: true, forId: item.id });
+                    setIsCreateNewFolder({ isOpen: false, forId: null });
+                  }}
+                >
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/992/992651.png"
+                    alt="add"
+                    width={"16px"}
+                    height={"16px"}
+                  />
+                </button>
+
+                <button
+                  title="add folder"
+                  onClick={(e) => {
+                    e.stopPropagation();
+
+                    setIsCreateNewFolder({ isOpen: true, forId: item.id });
+                    setIsCreateNewFile({ isOpen: false, forId: null });
+                  }}
+                >
                   <img
                     src="https://cdn-icons-png.flaticon.com/512/992/992651.png"
                     alt="add"
@@ -76,7 +109,42 @@ const Folder = ({
                 openFolderIds={openFolderIds}
                 handleFolderToggle={handleFolderToggle}
                 handleDelete={handleDelete}
+                handleCreateNewFile={handleCreateNewFile}
+                handleCreateNewFolder={handleCreateNewFolder}
               />
+            )}
+
+            {((isCreateNewFile.isOpen && isCreateNewFile.forId === item.id) ||
+              (isCreateNewFolder.isOpen &&
+                isCreateNewFolder.forId === item.id)) && (
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+
+                  const formData = new FormData(e.target);
+                  const fileOrFolderName = formData.get("fileOrFolderName");
+
+                  if (isCreateNewFile.isOpen) {
+                    handleCreateNewFile(item.id, fileOrFolderName);
+                  } else {
+                    handleCreateNewFolder(item.id, fileOrFolderName);
+                  }
+
+                  setIsCreateNewFile({ forId: null, isOpen: false });
+                  setIsCreateNewFolder({ forId: null, isOpen: false });
+                }}
+              >
+                <input
+                  name="fileOrFolderName"
+                  type="text"
+                  placeholder={
+                    isCreateNewFile.isOpen && isCreateNewFile.forId === item.id
+                      ? "Type file name.."
+                      : "Type folder name"
+                  }
+                />
+                <button type="submit">Save</button>
+              </form>
             )}
           </React.Fragment>
         );
@@ -97,6 +165,27 @@ const traverseAndDelete = (structure, id) => {
     }
 
     return item.id !== id;
+  });
+};
+
+const traverseAndAdd = (structure, id, fileOrFolderName, isFolder) => {
+  if (structure.length < 1) return structure;
+
+  return structure.forEach((item) => {
+    if (item.isFolder)
+      if (item.id === id) {
+        item.children = [
+          ...item.children,
+          {
+            id: new Date().getMilliseconds(),
+            name: fileOrFolderName,
+            isFolder: isFolder,
+            children: [],
+          },
+        ];
+      } else {
+        traverseAndAdd(item.children, id);
+      }
   });
 };
 
@@ -122,6 +211,14 @@ const index = () => {
     setStructure(updatedStructure);
   };
 
+  const handleCreateNewFile = (id, fileName) => {
+    traverseAndAdd(structure, id, fileName, false);
+  };
+
+  const handleCreateNewFolder = (id, folderName) => {
+    traverseAndAdd(structure, id, folderName, true);
+  };
+
   return (
     <div className={styles.container}>
       <h1>File Explorer</h1>
@@ -132,6 +229,8 @@ const index = () => {
         openFolderIds={openFolderIds}
         handleFolderToggle={handleFolderToggle}
         handleDelete={handleDelete}
+        handleCreateNewFile={handleCreateNewFile}
+        handleCreateNewFolder={handleCreateNewFolder}
       />
     </div>
   );
