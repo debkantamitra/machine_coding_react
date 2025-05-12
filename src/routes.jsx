@@ -2,6 +2,7 @@ import TabForm from "./problems/TabForm";
 import Pagination from "./problems/Pagination";
 import Autocomplete from "./problems/Autocomplete";
 import FileExplorer from "./problems/FileExplorer";
+import ProgressBar from "./problems/ProgressBar";
 
 export const routes = [
   {
@@ -23,5 +24,10 @@ export const routes = [
     path: "/file-explorer",
     component: <FileExplorer />,
     label: "FileExplorer",
+  },
+  {
+    path: "/progress-bar",
+    component: <ProgressBar />,
+    label: "ProgressBar",
   },
 ];

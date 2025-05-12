@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.outer {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid black;
+  width: 100%;
+}
+
+.inner {
+  padding: 0.5rem;
+  background-color: green;
+  transition: 0.5s ease;
+  text-align: end;
+}
+
+h1 {
+  margin-bottom: 1rem;
+}
