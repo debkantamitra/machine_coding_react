@@ -6,7 +6,7 @@ import ProgressBar from "./components/ProgressBar";
 // the progress bar should have animation on load
 // the progress bar should properly show the percentage in all the cases: 0%, < 5%, > 95%
 
-const progressList = [0, 10, 25, 50, 99, 75];
+const progressList = [0, 10, 60, 50, 99, 75];
 
 const index = () => {
   return (
